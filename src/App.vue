@@ -5,9 +5,34 @@
             <router-link to="/about">About</router-link>
           </div>
           <router-view/>
-        <!-- All your app content goes here. -->
-      
-        <!-- Also try to add a button! -->
+
+          <w-button
+          class="my12"
+          @click="showDrawer = !showDrawer"
+          outline
+          color="primary">
+          Show drawer
+        </w-button>
+
+            <w-drawer
+                v-model="showDrawer"
+                absolute
+                width="160px">
+                <w-button
+                class="button--close"
+                @click="showDrawer = false"
+                sm
+                outline
+                round
+                absolute
+                color="primary"
+                icon="wi-cross">
+            </w-button>
+</w-drawer>
+
+         
+
+
         <w-flex class="wrap">
             <w-button class="ma1" bg-color="success">success</w-button>
             <w-button class="ma1" bg-color="error">error</w-button>
@@ -20,6 +45,27 @@
       </w-app>
 
 </template>
+
+<script>
+    import {
+        ref,
+        computed
+    } from 'vue';
+    export default {
+        setup() {
+            const showDrawer = ref(false)
+
+            const position = computed(function() {
+                return showDrawer.value || 'left'
+            });
+
+            return {
+                showDrawer,
+                position
+            }
+        }
+    }
+</script>
 
 <style lang="scss">
     #app {
